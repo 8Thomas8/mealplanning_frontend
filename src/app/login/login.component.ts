@@ -47,6 +47,18 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('email').hasError('email') ? ERROR_EMAIL_INVALID : '';
   }
 
+  getPasswordErrorMessage() {
+    if (this.loginForm.get('password').hasError('required')) {
+      return ERROR_EMPTY;
+    }
+  }
+
+  getPasswordConfirmationErrorMessage() {
+    if (this.loginForm.get('passwordConfirmation').hasError('required')) {
+      return ERROR_EMPTY;
+    }
+  }
+
   changeForm() {
     if (this.changeButtonValue === CHANGE_BUTTON_VALUE_CREATE) {
       this.changeButtonValue = CHANGE_BUTTON_VALUE_LOGIN;
@@ -62,5 +74,15 @@ export class LoginComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  onClick() {
+    if (this.changeButtonValue === CHANGE_BUTTON_VALUE_CREATE) {
+      // Appel de la méthode de création de compte
+      alert('Création du compte');
+    } else {
+      // Appel de la méthode de connexion
+      alert('Connexion');
+    }
   }
 }
