@@ -9,6 +9,9 @@ const CHANGE_BUTTON_VALUE_LOGIN = 'Créer un compte';
 const ERROR_EMPTY = 'Vous devez entrer une valeur';
 const ERROR_EMAIL_INVALID = 'Ce n\'est un email valide';
 
+const TITLE_CREATE = 'Création de compte'
+const TITLE_LOGIN = ' Connexion'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,9 +19,9 @@ const ERROR_EMAIL_INVALID = 'Ce n\'est un email valide';
 })
 
 export class LoginComponent implements OnInit {
-  hide = true;
   validButtonValue: string = VALID_BUTTON_VALUE_LOGIN;
   changeButtonValue: string = CHANGE_BUTTON_VALUE_LOGIN;
+  titleValue: string = TITLE_LOGIN;
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -59,13 +62,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  changeForm() {
+  changePage() {
     if (this.changeButtonValue === CHANGE_BUTTON_VALUE_CREATE) {
       this.changeButtonValue = CHANGE_BUTTON_VALUE_LOGIN;
       this.validButtonValue = VALID_BUTTON_VALUE_LOGIN;
+      this.titleValue = TITLE_LOGIN;
     } else {
       this.changeButtonValue = CHANGE_BUTTON_VALUE_CREATE;
       this.validButtonValue = VALID_BUTTON_VALUE_CREATE;
+      this.titleValue = TITLE_CREATE;
     }
   }
 
