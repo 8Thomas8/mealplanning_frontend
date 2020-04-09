@@ -5,29 +5,37 @@
       <input matInput placeholder="Pseudo" id="username" type="text" formControlName="username" required>
       <mat-error *ngIf="loginForm.get('username').invalid">{{getUsernameErrorMessage()}}</mat-error>
     </mat-form-field>
+
     <br />
+
     <mat-form-field appearance="fill" *ngIf="checkIfInLoginPage()">
       <mat-label>Entrez votre email</mat-label>
       <input matInput placeholder="pat@example.com" id="email" type="text" formControlName="email" required>
       <mat-error *ngIf="loginForm.get('email').invalid">{{getEmailErrorMessage()}}</mat-error>
     </mat-form-field>
+
     <br />
+
     <mat-form-field appearance="fill">
       <mat-label>Entrer le mot de passe</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" required>
+      <input matInput placeholder="password" id="password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
+
     <br />
+
     <mat-form-field appearance="fill" *ngIf="checkIfInLoginPage()">
       <mat-label>Confirmez le mot de passe</mat-label>
-      <input matInput [type]="hide ? 'passwordConfirmation' : 'text'" required>
+      <input matInput placeholder="password" id="passwordConfirmation" [type]="hide ? 'passwordConfirmation' : 'text'" formControlName="passwordConfirmation" required>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
+
     <br>
+
     <button mat-raised-button>{{validButtonValue}}</button> <button mat-raised-button (click)="changeForm()">{{changeButtonValue}}</button>
   </form>
 </div>
