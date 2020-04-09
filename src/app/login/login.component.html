@@ -1,6 +1,11 @@
 <div class="login-form-container">
   <form id="login-form" [formGroup]="loginForm">
     <mat-card>
+      <mat-label>
+        <h2>
+          {{ titleValue }}
+        </h2>
+      </mat-label>
       <div class="inputs">
         <mat-form-field appearance="fill">
           <mat-label>Entrez votre identifiant</mat-label>
@@ -37,7 +42,7 @@
         <br>
 
         <button mat-raised-button (click)="onClick()">{{validButtonValue}}</button>
-        <button mat-raised-button (click)="changeForm()">{{changeButtonValue}}</button>
+        <button mat-raised-button (click)="changePage()">{{changeButtonValue}}</button>
       </div>
     </mat-card>
 
