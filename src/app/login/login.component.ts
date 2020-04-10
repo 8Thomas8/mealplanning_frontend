@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 const VALID_BUTTON_VALUE_CREATE = 'Créer le compte';
 const VALID_BUTTON_VALUE_LOGIN = 'Connexion';
@@ -9,15 +9,14 @@ const CHANGE_BUTTON_VALUE_LOGIN = 'Créer un compte';
 const ERROR_EMPTY = 'Vous devez entrer une valeur';
 const ERROR_EMAIL_INVALID = 'Ce n\'est un email valide';
 
-const TITLE_CREATE = 'Création de compte'
-const TITLE_LOGIN = ' Connexion'
+const TITLE_CREATE = 'Création de compte';
+const TITLE_LOGIN = ' Connexion';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.sass'],
 })
-
 export class LoginComponent implements OnInit {
   validButtonValue: string = VALID_BUTTON_VALUE_LOGIN;
   changeButtonValue: string = CHANGE_BUTTON_VALUE_LOGIN;
@@ -30,11 +29,9 @@ export class LoginComponent implements OnInit {
     passwordConfirmation: new FormControl('', [Validators.required]),
   });
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getUsernameErrorMessage() {
     if (this.loginForm.get('username').hasError('required')) {
@@ -47,7 +44,9 @@ export class LoginComponent implements OnInit {
       return ERROR_EMPTY;
     }
 
-    return this.loginForm.get('email').hasError('email') ? ERROR_EMAIL_INVALID : '';
+    return this.loginForm.get('email').hasError('email')
+      ? ERROR_EMAIL_INVALID
+      : '';
   }
 
   getPasswordErrorMessage() {
