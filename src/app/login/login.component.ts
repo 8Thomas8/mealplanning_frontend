@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../services/authentication/authentication.service';
-import {first} from 'rxjs/operators';
-import {ActivatedRoute, Route} from '@angular/router';
+import {Router} from '@angular/router';
 
 const VALID_BUTTON_VALUE_CREATE = 'Créer le compte';
 const VALID_BUTTON_VALUE_LOGIN = 'Connexion';
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
     passwordConfirmation: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -96,18 +95,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+
+    this.loginForm.get('email').disable();
+    this.loginForm.get('passwordConfirmation').disable();
+
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.authenticationService.login(this.loginForm.get('name').value, this.loginForm.get('password').value)
-      .pipe(first())
-      .subscribe(
-        data => {
-         console.log('ok');
-        },
-        error => {
-          console.log('ko');
-        });
+    const loginPromise = this.authenticationService.login(this.loginForm.get('username').value, this.loginForm.get('password').value)
+      .toPromise();
+
+    loginPromise.then(() => {
+      this.authenticationService.getLogged().subscribe(() => {
+        this.router.navigateByUrl('/my-account');
+      });
+    });
   }
 }
