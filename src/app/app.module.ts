@@ -17,7 +17,7 @@ import { AccountComponent } from './account/account.component';
     AppComponent,
     NavComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
     AccountComponent
   ],
   imports: [
