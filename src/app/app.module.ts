@@ -8,7 +8,7 @@ import { AppMaterialModule } from './app-material.module';
 import { NavComponent } from './commons/nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserAnimationsModule,
     AppMaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({cookieName: 'XSRF-TOKEN'})
   ],
   providers: [],
   bootstrap: [AppComponent]
