@@ -4,7 +4,7 @@
     <span class="spacer"></span>
     <span>
       <a mat-raised-button matTooltip="Dashboard" [routerLink]="'/dashboard'" [routerLinkActive]="'mat-accent'"><mat-icon>home</mat-icon> Dashboard</a>
-      <a mat-raised-button matTooltip="Mon compte"><mat-icon>account_box</mat-icon> Mon compte</a>
+      <a mat-raised-button matTooltip="Mon compte" [routerLink]="'/my-account'" [routerLinkActive]="'mat-accent'" *ngIf="currentUser"><mat-icon>account_box</mat-icon> Mon compte</a>
       <a mat-raised-button matTooltip="Se connecter" [routerLink]="'/login'" [routerLinkActive]="'mat-accent'" *ngIf="!currentUser"><mat-icon>power</mat-icon> Se connecter</a>
       <a mat-raised-button matTooltip="Se déconnecter" (click)="onLogout()" *ngIf="currentUser"><mat-icon>power</mat-icon> Se déconnecter</a>
     </span>

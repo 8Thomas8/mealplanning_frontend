@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-label>
+    <h2>
+      Mon compte
+    </h2>
+  </mat-label>
+
+  <form id="login-form" [formGroup]="accountForm">
+    <label for="username">Pseudo: </label>
+    <mat-form-field appearance="fill">
+      <input matInput id="username" type="text" formControlName="username">
+    </mat-form-field>
+
+    <br/>
+
+    <label for="email">Email: </label>
+    <mat-form-field appearance="fill">
+      <input matInput id="email" type="email" formControlName="email">
+    </mat-form-field>
+  </form>
+</mat-card>
+
+
