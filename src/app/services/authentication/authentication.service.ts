@@ -13,12 +13,9 @@ export class AuthenticationService {
   public currentUser: Observable<CurrentUser>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<CurrentUser>(JSON.parse(localStorage.getItem('currentUser')));
+//    this.currentUserSubject = new BehaviorSubject<CurrentUser>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUserSubject = new BehaviorSubject<CurrentUser>(null);
     this.currentUser = this.currentUserSubject.asObservable();
-  }
-
-  public get currentUserValue(): CurrentUser {
-    return this.currentUserSubject.value;
   }
 
   login(username: string, password: string) {
@@ -35,13 +32,14 @@ export class AuthenticationService {
   getLogged() {
     return this.http.get<CurrentUser>(`${environment.apiUrl}/getLogged`).pipe(map(currentUser => {
         this.currentUserSubject.next(currentUser);
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+//        localStorage.setItem('currentUser', JSON.stringify(currentUser));
       }
     ));
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
+//    localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    return this.http.post(`${environment.apiUrl}/logout`, null);
   }
 }
