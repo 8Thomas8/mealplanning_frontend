@@ -25,7 +25,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppMaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({cookieName: 'XSRF-TOKEN'})
+    HttpClientXsrfModule
   ],
   providers: [],
   bootstrap: [AppComponent]
