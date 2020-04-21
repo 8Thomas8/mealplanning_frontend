@@ -10,13 +10,15 @@ import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
