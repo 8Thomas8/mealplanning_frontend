@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
 
     loginPromise.then(() => {
       this.authenticationService.getLogged().subscribe(() => {
-        this.router.navigateByUrl('/my-account');
+        this.router.navigateByUrl('/dashboard');
       });
     });
   }
