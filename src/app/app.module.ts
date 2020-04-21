@@ -27,7 +27,7 @@ import { AccountComponent } from './account/account.component';
     AppMaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({cookieName: 'XSRF-TOKEN'})
+    HttpClientXsrfModule
   ],
   providers: [],
   bootstrap: [AppComponent]
