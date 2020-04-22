@@ -12,17 +12,5 @@ export class AppComponent implements OnInit{
   constructor(private csrfService: CsrfService) {
   }
 
-  ngOnInit(): void {
-    if (!this.getCsrfStatus()) {
-      this.getCsrfToken();
-    }
-  }
-
-  getCsrfStatus() {
-    return this.csrfService.getCsrfStatus();
-  }
-
-  getCsrfToken() {
-    return this.csrfService.getFirstToken();
-  }
+  ngOnInit(): void {}
 }

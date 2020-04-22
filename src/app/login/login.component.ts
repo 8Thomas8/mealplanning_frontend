@@ -4,6 +4,7 @@ import {AuthenticationService} from '../services/authentication/authentication.s
 import {Router} from '@angular/router';
 import {UserService} from '../services/api/user.service';
 import {User} from '../models/user';
+import {CsrfService} from '../services/csrf/csrf.service';
 
 const VALID_BUTTON_VALUE_CREATE = 'Créer le compte';
 const VALID_BUTTON_VALUE_LOGIN = 'Connexion';
@@ -33,10 +34,15 @@ export class LoginComponent implements OnInit {
     passwordConfirmation: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private userService: UserService) {
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router, private userService: UserService,
+              private csrfService: CsrfService) {
   }
 
   ngOnInit(): void {
+    if (!this.getCsrfStatus()) {
+      this.getCsrfToken();
+    }
   }
 
   getUsernameErrorMessage() {
@@ -132,5 +138,13 @@ export class LoginComponent implements OnInit {
     signinPromise.then(() => {
       this.login();
     });
+  }
+
+  getCsrfToken() {
+    return this.csrfService.getFirstToken();
+  }
+
+  getCsrfStatus() {
+    return this.csrfService.getCsrfStatus();
   }
 }

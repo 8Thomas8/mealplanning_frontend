@@ -24,6 +24,10 @@ export class CsrfService {
     this.http.get<string>(`${environment.apiUrl}/getToken`).subscribe();
   }
 
+  csrfStatusToFalse() {
+    this.currentCsrfStatusSubject.next(false);
+  }
+
   getCsrfStatus() {
     return this.currentCsrfStatusSubject.value;
   }
