@@ -23,6 +23,6 @@ export class AppComponent implements OnInit{
   }
 
   getCsrfToken() {
-    return this.csrfService.getToken();
+    return this.csrfService.getFirstToken();
   }
 }
