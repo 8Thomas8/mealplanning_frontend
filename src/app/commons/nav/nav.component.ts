@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../services/authentication/authentication.service';
 import {CurrentUser} from '../../models/current-user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +12,7 @@ export class NavComponent implements OnInit {
 
   currentUser: CurrentUser;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -22,6 +23,10 @@ export class NavComponent implements OnInit {
 
   }
   onLogout() {
-    this.authenticationService.logout().subscribe();
+    const logout = this.authenticationService.logout().toPromise();
+
+    logout.then(() => {
+      this.router.navigateByUrl('/login');
+    });
   }
 }
