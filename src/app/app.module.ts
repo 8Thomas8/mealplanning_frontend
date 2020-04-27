@@ -9,8 +9,10 @@ import { NavComponent } from './commons/nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './user-dashboard/dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
+import { SidebarContentComponent } from './user-dashboard/sidebar-content/sidebar-content.component';
+import { DashboardContentComponent } from './user-dashboard/dashboard-content/dashboard-content.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AccountComponent } from './account/account.component';
     NavComponent,
     LoginComponent,
     DashboardComponent,
-    AccountComponent
+    AccountComponent,
+    SidebarContentComponent,
+    DashboardContentComponent
   ],
   imports: [
     BrowserModule,
