@@ -8,7 +8,7 @@ import {User} from '../../models/user';
 export class UserService extends ApiService<User>{
 
   getAll(params) {
-    return this.get(params);
+    return this.get();
   }
 
   getOne(id: number) {
