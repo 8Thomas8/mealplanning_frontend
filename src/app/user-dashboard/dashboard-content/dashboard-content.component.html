@@ -1,3 +1,28 @@
-<div>
+<div class="placeholderDiv">
   <p class="placeholder">Dashboard</p>
+</div>
+
+<div class="createModal" *ngIf="showCreateModalStatus">
+  <form [formGroup]="newPlanningForm">
+    <mat-card>
+      <mat-card-title>
+        <mat-icon class="closeCreateModalIcon" (click)="onClose()">highlight_off</mat-icon>
+        <h2>
+          Créer un nouveau planning
+        </h2>
+      </mat-card-title>
+      <div class="inputs">
+        <mat-form-field appearance="fill">
+          <mat-label>Entrez le nom du planning</mat-label>
+          <input matInput placeholder="Nom" id="name" type="text" formControlName="name" required>
+          <mat-error *ngIf="newPlanningForm.get('name').invalid">{{getNameErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button (click)="onCreate()">Créer</button>
+      </div>
+    </mat-card>
+
+  </form>
 </div>
