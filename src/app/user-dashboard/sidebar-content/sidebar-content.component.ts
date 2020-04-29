@@ -35,4 +35,8 @@ export class SidebarContentComponent implements OnInit {
   getCreateModalStatus() {
     this.createPlanningModalService.getStatus().subscribe(status => this.showModalStatus = status);
   }
+
+  onSelect(planning: Planning) {
+    this.planningService.selectPlanning(planning);
+  }
 }

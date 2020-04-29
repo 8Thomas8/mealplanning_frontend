@@ -8,7 +8,7 @@
   <div class="planningsDiv">
     <h2>Mes plannings</h2>
     <div *ngFor="let planning of plannings">
-      <button mat-stroked-button>{{ planning.name }}</button>
+      <button mat-stroked-button (click)="onSelect(planning)">{{ planning.name }}</button>
       <br>
     </div>
   </div>
