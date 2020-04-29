@@ -14,6 +14,7 @@ const ERROR_EMPTY = 'Vous devez entrer une valeur';
 })
 export class DashboardContentComponent implements OnInit {
   showCreateModalStatus: boolean;
+  selectedPlanning: Planning;
 
   newPlanningForm = new FormGroup({
     name: new FormControl('', [Validators.required])
@@ -24,6 +25,7 @@ export class DashboardContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCreateModalStatus();
+    this.getSelectedPlanning();
   }
 
   getCreateModalStatus() {
@@ -45,10 +47,21 @@ export class DashboardContentComponent implements OnInit {
     planning.name = this.newPlanningForm.get('name').value;
 
     this.planningService.addPlanning(planning);
+
+    this.onClose();
   }
 
   onClose() {
     this.newPlanningForm.reset();
     this.createPlanningModalService.setFalse();
+  }
+
+  getSelectedPlanning() {
+    this.planningService.getSelectedPlanning().subscribe(planning => this.selectedPlanning = planning);
+  }
+
+  onDelete(selectedPlanning: Planning) {
+    this.planningService.delete(selectedPlanning);
+    this.selectedPlanning = null;
   }
 }
