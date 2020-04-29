@@ -3,7 +3,7 @@
 </div>
 
 <div class="createModal" *ngIf="showCreateModalStatus">
-  <form [formGroup]="newPlanningForm">
+  <form [formGroup]="newPlanningForm" (ngSubmit)="onCreate()">
     <mat-card>
       <mat-card-title>
         <mat-icon class="closeCreateModalIcon" (click)="onClose()">highlight_off</mat-icon>
@@ -20,7 +20,7 @@
 
         <br>
 
-        <button mat-raised-button (click)="onCreate()">Créer</button>
+        <button mat-raised-button type="submit">Créer</button>
       </div>
     </mat-card>
 
