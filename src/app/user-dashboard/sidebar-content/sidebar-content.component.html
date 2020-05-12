@@ -1,0 +1,15 @@
+<div>
+  <div class="buttonDiv">
+    <button mat-stroked-button color="primary" (click)="onCreate()">Créer
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="planningsDiv">
+    <h2>Mes plannings</h2>
+    <div *ngFor="let planning of plannings">
+      <button mat-stroked-button (click)="onSelect(planning)">{{ planning.name }}</button>
+      <br>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+@import "./src/styles"
+
+.dashboard
+  position: inherit
+  display: inherit
+
+mat-sidenav
+  margin-top: $navHeight
+  height: calc(100% - #{$navHeight})
+  min-width: $sidenavWidth
+  max-width: $sidenavWidth
+
+mat-sidenav-content
+  height: calc(100% - #{$navHeight})
+  width: 100vw - mat-sidenav

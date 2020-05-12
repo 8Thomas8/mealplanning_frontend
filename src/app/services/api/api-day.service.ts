@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from './api.service';
 import {User} from '../../models/user';
+import {Day} from '../../models/day';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends ApiService<User>{
+export class ApiDayService extends ApiService<Day>{
 
   getAll(params) {
-    return this.get(params);
+    return this.get();
   }
 
   getOne(id: number) {
@@ -23,15 +24,11 @@ export class UserService extends ApiService<User>{
     return this.post(data);
   }
 
-  register(data) {
-    return this.post(data, './register');
-  }
-
   update(id, data) {
     return this.put(id, data);
   }
 
   protected url(): string {
-    return 'user';
+    return 'day';
   }
 }

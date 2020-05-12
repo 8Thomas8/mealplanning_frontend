@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../services/authentication/authentication.service';
 import {Router} from '@angular/router';
-import {UserService} from '../services/api/user.service';
+import {ApiUserService} from '../services/api/api-user.service';
 import {User} from '../models/user';
 import {CsrfService} from '../services/csrf/csrf.service';
 
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private authenticationService: AuthenticationService,
-              private router: Router, private userService: UserService,
+              private router: Router, private apiUserService: ApiUserService,
               private csrfService: CsrfService) {
   }
 
@@ -132,7 +132,7 @@ export class LoginComponent implements OnInit {
     user.email = this.loginForm.get('email').value;
     user.password = this.loginForm.get('password').value;
 
-    const signinPromise = this.userService.register(user)
+    const signinPromise = this.apiUserService.register(user)
       .toPromise();
 
     signinPromise.then(() => {

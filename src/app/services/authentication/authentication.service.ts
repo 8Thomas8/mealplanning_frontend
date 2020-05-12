@@ -53,4 +53,8 @@ export class AuthenticationService {
       headers: new HttpHeaders().set(this.csrfService.getCsrfHeaderName(), this.csrfService.getCsrfToken())
     };
   }
+
+  getCurrentUser() {
+    return this.currentUserSubject;
+  }
 }

@@ -6,9 +6,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDividerModule} from '@angular/material/divider';
 
 
-const importExport = [MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatFormFieldModule, MatInputModule, MatCardModule];
+const importExport = [MatButtonModule, MatToolbarModule, MatIconModule, MatTooltipModule, MatFormFieldModule, MatInputModule, MatCardModule, MatSidenavModule, MatDividerModule];
 
 @NgModule({
   imports: importExport,
