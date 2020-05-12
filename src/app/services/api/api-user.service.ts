@@ -31,6 +31,10 @@ export class ApiUserService extends ApiService<User>{
     return this.put(id, data);
   }
 
+  updateSelf(id, data) {
+    return this.put(id + '/update', data);
+  }
+
   protected url(): string {
     return 'user';
   }
