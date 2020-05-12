@@ -29,5 +29,9 @@
 
 <div class="selectedPlanning" *ngIf="selectedPlanning">
   <h2> Planning: {{ selectedPlanning.name }}</h2>
-  <button mat-raised-button color="warn" (click)="onDelete(selectedPlanning)">Supprimer</button>
+  <div *ngFor="let day of selectedPlanning.days">
+    {{day.date}}
+    <button (click)="onDeleteDay(day)">Delete</button>
+  </div>
+  <button mat-raised-button color="warn" (click)="onDeletePlanning(selectedPlanning)">Supprimer</button>
 </div>

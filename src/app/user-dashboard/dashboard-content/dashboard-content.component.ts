@@ -4,6 +4,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ApiPlanningService} from '../../services/api/api-planning.service';
 import {Planning} from '../../models/planning';
 import {PlanningService} from '../../services/planning.service';
+import {ApiDayService} from '../../services/api/api-day.service';
+import {Day} from '../../models/day';
 
 const ERROR_EMPTY = 'Vous devez entrer une valeur';
 
@@ -20,7 +22,7 @@ export class DashboardContentComponent implements OnInit {
     name: new FormControl('', [Validators.required])
   });
 
-  constructor(private createPlanningModalService: CreatePlanningModalService, private planningService: PlanningService) {
+  constructor(private createPlanningModalService: CreatePlanningModalService, private planningService: PlanningService, private apiDayService: ApiDayService) {
   }
 
   ngOnInit(): void {
@@ -60,8 +62,12 @@ export class DashboardContentComponent implements OnInit {
     this.planningService.getSelectedPlanning().subscribe(planning => this.selectedPlanning = planning);
   }
 
-  onDelete(selectedPlanning: Planning) {
+  onDeletePlanning(selectedPlanning: Planning) {
     this.planningService.delete(selectedPlanning);
     this.selectedPlanning = null;
+  }
+
+  onDeleteDay(day: Day) {
+    this.apiDayService.deleteOne(day.id).subscribe();
   }
 }
