@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CreatePlanningModalService} from '../../services/create-planning-modal.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ApiPlanningService} from '../../services/api/api-planning.service';
 import {Planning} from '../../models/planning';
 import {PlanningService} from '../../services/planning.service';
 import {ApiDayService} from '../../services/api/api-day.service';

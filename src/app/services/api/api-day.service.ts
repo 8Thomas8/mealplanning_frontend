@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {ApiService} from './api.service';
-import {User} from '../../models/user';
 import {Day} from '../../models/day';
 
 @Injectable({
