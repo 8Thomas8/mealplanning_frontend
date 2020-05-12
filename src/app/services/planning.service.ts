@@ -64,7 +64,11 @@ export class PlanningService {
   }
 
   delete(selectedPlanning: Planning) {
-    const delPlanning = this.apiPlanningService.deleteOne(selectedPlanning.id).toPromise();
-    delPlanning.then(() => this.getPlannings());
+    const user = this.authenticationService.getCurrentUser().getValue();
+    user.plannings = user.plannings.filter(planning => planning.id !== selectedPlanning.id);
+
+    this.currentPlannings.next(user.plannings);
+    const updateUser = this.apiUserService.updateSelf(this.userId, user).toPromise();
+    updateUser.then(() => this.apiPlanningService.deleteOne(selectedPlanning.id).subscribe());
   }
 }
