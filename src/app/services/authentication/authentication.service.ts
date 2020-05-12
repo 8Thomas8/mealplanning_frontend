@@ -48,12 +48,6 @@ export class AuthenticationService {
     return this.http.post(`${environment.apiUrl}/logout`, null, options);
   }
 
-  register() {
-    const options = {
-      headers: new HttpHeaders().set(this.csrfService.getCsrfHeaderName(), this.csrfService.getCsrfToken())
-    };
-  }
-
   getCurrentUser() {
     return this.currentUserSubject;
   }

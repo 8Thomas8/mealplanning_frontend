@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiPlanningService} from '../../services/api/api-planning.service';
 import {Planning} from '../../models/planning';
 import {CreatePlanningModalService} from '../../services/create-planning-modal.service';
 import {PlanningService} from '../../services/planning.service';
