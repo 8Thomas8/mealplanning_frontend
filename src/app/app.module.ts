@@ -13,6 +13,7 @@ import { DashboardComponent } from './user-dashboard/dashboard/dashboard.compone
 import { AccountComponent } from './account/account.component';
 import { SidebarContentComponent } from './user-dashboard/sidebar-content/sidebar-content.component';
 import { DashboardContentComponent } from './user-dashboard/dashboard-content/dashboard-content.component';
+import { CalendarComponent } from './user-dashboard/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DashboardContentComponent } from './user-dashboard/dashboard-content/da
     DashboardComponent,
     AccountComponent,
     SidebarContentComponent,
-    DashboardContentComponent
+    DashboardContentComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
