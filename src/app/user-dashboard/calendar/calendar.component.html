@@ -1,17 +1,24 @@
-<button mat-stroked-button (click)="downMonth()">Précédent</button><button mat-stroked-button (click)="upMonth()">Suivant</button>
+<button mat-stroked-button (click)="downMonth()">Précédent</button>
+<button mat-stroked-button (click)="upMonth()">Suivant</button>
 
-<div class="day-of-week">
-  <div>{{ getDayName(0) }}</div>
-  <div>{{ getDayName(1) }}</div>
-  <div>{{ getDayName(2) }}</div>
-  <div>{{ getDayName(3) }}</div>
-  <div>{{ getDayName(4) }}</div>
-  <div>{{ getDayName(5) }}</div>
-  <div>{{ getDayName(6) }}</div>
+<div class="month-indicator">
+  <h2>{{ getMonthName(baseDate.getMonth()) }}</h2>
 </div>
 
-<div class="date-grid">
-  <div *ngFor="let day of days" class="dayDiv" [style]="getGridPos(day)">
-    {{ day.getDate() }}
+<div class="gridCalendar">
+  <div class="day-of-week">
+    <div>{{ getDayName(0) }}</div>
+    <div>{{ getDayName(1) }}</div>
+    <div>{{ getDayName(2) }}</div>
+    <div>{{ getDayName(3) }}</div>
+    <div>{{ getDayName(4) }}</div>
+    <div>{{ getDayName(5) }}</div>
+    <div>{{ getDayName(6) }}</div>
+  </div>
+
+  <div class="date-grid">
+    <div *ngFor="let day of days" class="dayDiv" [style]="getGridPos(day)">
+      {{ day.getDate() }}
+    </div>
   </div>
 </div>
