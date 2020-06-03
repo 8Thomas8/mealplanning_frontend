@@ -19,6 +19,12 @@
   <div class="date-grid">
     <div *ngFor="let day of days" class="dayDiv" [style]="getGridPos(day)">
       {{ day.getDate() }}
+      <p>Midi: <span class="createMoment" (click)="onClickCreateMeal('midi')">Créer</span></p>
+      <p>Soir: <span class="createMoment" (click)="onClickCreateMeal('soir')">Créer</span></p>
     </div>
   </div>
+</div>
+
+<div class="modalCreateSlot" *ngIf="modalSlotStatus">
+  <p>TEST</p>
 </div>

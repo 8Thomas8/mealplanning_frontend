@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiSlotService} from "../../services/api/api-slot.service";
 
 const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
   'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
@@ -15,8 +16,11 @@ export class CalendarComponent implements OnInit {
   todayDate: Date;
   days: Date[];
 
-  constructor() {
+  modalSlotStatus: boolean;
+
+  constructor(private apiSlotService: ApiSlotService) {
     this.days = new Array();
+    this.modalSlotStatus = false;
   }
 
   ngOnInit(): void {
@@ -60,5 +64,9 @@ export class CalendarComponent implements OnInit {
     if (day.getDate() === 1) {
       return `grid-column: ${day.getDay()}`;
     }
+  }
+
+  onClickCreateMeal(moment: string) {
+    this.modalSlotStatus = true;
   }
 }
