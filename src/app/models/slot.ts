@@ -5,4 +5,5 @@ export class Slot {
   date: Date;
   guestNumber: number;
   meals?: Meal[];
+  momentName = 'Midi' || 'Soir';
 }
