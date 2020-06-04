@@ -27,7 +27,7 @@ export class CalendarComponent implements OnInit {
 
   slotForm = new FormGroup({
     date: new FormControl('', [Validators.required]),
-    guestNumber: new FormControl('', [Validators.required]),
+    guestNumber: new FormControl(1, [Validators.required]),
     momentName: new FormControl('', [Validators.required])
   });
 
@@ -98,12 +98,11 @@ export class CalendarComponent implements OnInit {
   }
 
   onCreateSlot() {
-    console.log(this.slotForm);
     const newSlot = new Slot();
     newSlot.date = this.slotForm.get('date').value;
     newSlot.guestNumber = this.slotForm.get('guestNumber').value;
     newSlot.momentName = this.slotForm.get('momentName').value;
-    // newSlot.meals = this.slotForm.get('meals').value;
+    newSlot.meals = null;
 
     this.apiSlotService.create(newSlot).subscribe();
   }
