@@ -28,6 +28,7 @@ export class SidebarContentComponent implements OnInit {
   }
 
   onCreate() {
+    this.planningService.selectPlanning(null);
     this.createPlanningModalService.setTrue();
   }
 
