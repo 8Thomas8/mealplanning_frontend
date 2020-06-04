@@ -59,8 +59,8 @@ export class DashboardContentComponent implements OnInit {
     this.planningService.getSelectedPlanning().subscribe(planning => this.selectedPlanning = planning);
   }
 
-  onDeletePlanning(selectedPlanning: Planning) {
-    this.planningService.delete(selectedPlanning);
-    this.selectedPlanning = null;
-  }
+  // onDeletePlanning(selectedPlanning: Planning) {
+  //   this.planningService.delete(selectedPlanning);
+  //   this.selectedPlanning = null;
+  // }
 }
