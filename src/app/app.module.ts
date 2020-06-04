@@ -14,6 +14,7 @@ import { AccountComponent } from './account/account.component';
 import { SidebarContentComponent } from './user-dashboard/sidebar-content/sidebar-content.component';
 import { DashboardContentComponent } from './user-dashboard/dashboard-content/dashboard-content.component';
 import { CalendarComponent } from './user-dashboard/calendar/calendar.component';
+import { OverlayComponent } from './commons/overlay/overlay.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CalendarComponent } from './user-dashboard/calendar/calendar.component'
     AccountComponent,
     SidebarContentComponent,
     DashboardContentComponent,
-    CalendarComponent
+    CalendarComponent,
+    OverlayComponent
   ],
   imports: [
     BrowserModule,
