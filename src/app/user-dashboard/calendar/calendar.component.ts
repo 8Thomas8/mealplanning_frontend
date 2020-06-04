@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {ApiSlotService} from "../../services/api/api-slot.service";
+import {Component, OnInit} from '@angular/core';
+import {ApiSlotService} from '../../services/api/api-slot.service';
+import {CreateMealModalService} from '../../services/create-meal-modal.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Slot} from '../../models/slot';
 
 const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
   'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
 ];
 const dayNames = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+
+const MOMENT_NAMES = ['Midi', 'Soir'];
 
 @Component({
   selector: 'app-calendar',
@@ -12,15 +17,27 @@ const dayNames = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', '
   styleUrls: ['./calendar.component.sass']
 })
 export class CalendarComponent implements OnInit {
+  momentNames = MOMENT_NAMES;
+
   baseDate: Date;
   todayDate: Date;
   days: Date[];
 
-  modalSlotStatus: boolean;
+  showCreateModalStatus: boolean;
 
-  constructor(private apiSlotService: ApiSlotService) {
+  slotForm = new FormGroup({
+    date: new FormControl('', [Validators.required]),
+    guestNumber: new FormControl('', [Validators.required]),
+    momentName: new FormControl('', [Validators.required])
+  });
+
+  mealForm = new FormGroup({
+    name: new FormControl('', [Validators.required])
+  });
+
+  constructor(private apiSlotService: ApiSlotService, private createMealModalService: CreateMealModalService) {
     this.days = new Array();
-    this.modalSlotStatus = false;
+    this.getCreateModalStatus();
   }
 
   ngOnInit(): void {
@@ -66,7 +83,28 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  onClickCreateMeal(moment: string) {
-    this.modalSlotStatus = true;
+  getCreateModalStatus() {
+    this.createMealModalService.getStatus().subscribe(status => this.showCreateModalStatus = status);
+  }
+
+  onClickCreateMeal(moment: string, day: Date) {
+    this.createMealModalService.setTrue();
+    this.slotForm.get('momentName').setValue(moment);
+    this.slotForm.get('date').setValue(day);
+  }
+
+  onClose() {
+    this.createMealModalService.setFalse();
+  }
+
+  onCreateSlot() {
+    console.log(this.slotForm);
+    const newSlot = new Slot();
+    newSlot.date = this.slotForm.get('date').value;
+    newSlot.guestNumber = this.slotForm.get('guestNumber').value;
+    newSlot.momentName = this.slotForm.get('momentName').value;
+    // newSlot.meals = this.slotForm.get('meals').value;
+
+    this.apiSlotService.create(newSlot).subscribe();
   }
 }
