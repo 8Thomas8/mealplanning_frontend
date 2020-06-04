@@ -1,6 +1,6 @@
 <div>
   <div class="buttonDiv">
-    <button mat-stroked-button color="primary" (click)="onCreate()">Créer
+    <button mat-stroked-button color="primary" (click)="onCreate()" class="createButton">Créer
       <mat-icon>add_box</mat-icon>
     </button>
   </div>
@@ -8,7 +8,14 @@
   <div class="planningsDiv">
     <h2>Mes plannings</h2>
     <div *ngFor="let planning of plannings">
-      <button mat-stroked-button (click)="onSelect(planning)">{{ planning.name }}</button>
+      <div>
+        <hr>
+        <button mat-stroked-button (click)="onSelect(planning)" class="planningButton">{{ planning.name }}</button>
+        <button mat-stroked-button class="deleteButton">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+        <hr>
+      </div>
       <br>
     </div>
   </div>
