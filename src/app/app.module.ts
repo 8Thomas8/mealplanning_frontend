@@ -15,6 +15,19 @@ import { SidebarContentComponent } from './user-dashboard/sidebar-content/sideba
 import { DashboardContentComponent } from './user-dashboard/dashboard-content/dashboard-content.component';
 import { CalendarComponent } from './user-dashboard/calendar/calendar.component';
 import { OverlayComponent } from './commons/overlay/overlay.component';
+import {MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats} from '@angular/material/core';
+
+export const MY_FORMAT: MatDateFormats = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -37,7 +50,9 @@ import { OverlayComponent } from './commons/overlay/overlay.component';
     HttpClientModule,
     HttpClientXsrfModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
