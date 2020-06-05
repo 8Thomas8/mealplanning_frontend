@@ -20,8 +20,16 @@
     <div class="date-grid">
       <div *ngFor="let day of days" class="dayDiv" [style]="getGridPos(day)">
         {{ day.getDate() }}
-        <p>Midi: <span class="createMoment" (click)="onClickCreateMeal('Midi', day)">Créer</span></p>
-        <p>Soir: <span class="createMoment" (click)="onClickCreateMeal('Soir', day)">Créer</span></p>
+        <p>Midi: <span *ngIf="getSlot(day, 'Midi');else noSlot" style="color: red;"> {{getSlot(day, 'Midi').id}}</span>
+          <ng-template #noSlot><span class="createMoment" (click)="onClickCreateMeal('Midi', day)">Créer</span>
+          </ng-template>
+        </p>
+
+        <p>Soir: <span *ngIf="getSlot(day, 'Soir');else noSlot" style="color: red;"> {{getSlot(day, 'Soir').id}}</span>
+          <ng-template #noSlot><span class="createMoment" (click)="onClickCreateMeal('Soir', day)">Créer</span>
+          </ng-template>
+        </p>
+
       </div>
     </div>
   </div>
@@ -63,10 +71,10 @@
         <mat-form-field appearance="fill">
           <mat-label>Nombre de personnes</mat-label>
           <mat-slider id="guestNumber" type="number" formControlName="guestNumber" required
-            thumbLabel
-            tickInterval="1"
-            min="1"
-            max="20"></mat-slider>
+                      thumbLabel
+                      tickInterval="1"
+                      min="1"
+                      max="20"></mat-slider>
           <textarea matInput hidden></textarea>
         </mat-form-field>
 

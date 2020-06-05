@@ -6,10 +6,10 @@ import {Slot} from '../../models/slot';
 import {PlanningService} from '../../services/planning.service';
 import {Planning} from '../../models/planning';
 
-const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+const MONTH_NAMES = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
   'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
 ];
-const dayNames = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const DAY_NAMES = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
 const MOMENT_NAMES = ['Midi', 'Soir'];
 
@@ -61,11 +61,11 @@ export class CalendarComponent implements OnInit {
   }
 
   getMonthName(month: number) {
-    return monthNames[month - 1];
+    return MONTH_NAMES[month - 1];
   }
 
   getDayName(day: number) {
-    return dayNames[day];
+    return DAY_NAMES[day];
   }
 
   sortedDays() {
@@ -121,6 +121,26 @@ export class CalendarComponent implements OnInit {
     this.planningService.updateSelectedPlanning();
 
     this.onClose();
+  }
+
+  getSlot(date: Date, momentName: string) {
+    let slotArray: Slot[];
+    slotArray = this.planning.slots;
+    slotArray = slotArray.filter(slot => {
+      slot.date = new Date(slot.date);
+      return (slot.date.getFullYear() === date.getFullYear())
+        && (slot.date.getMonth() === date.getMonth())
+        && (slot.date.getDate() === date.getDate());
+    });
+    console.log(slotArray);
+    for (const slot of slotArray) {
+      if (slot.momentName === momentName) {
+        console.log(slot);
+        return slot;
+      }
+    }
+
+    return null;
   }
 
   private resetSlotForm() {
