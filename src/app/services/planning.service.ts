@@ -28,7 +28,6 @@ export class PlanningService {
 
   getPlannings() {
     this.apiUserService.getOne(this.userId).subscribe(data => {
-      console.log(data);
       const plannings = data.content[0].plannings;
       this.currentPlannings.next(plannings);
     });
@@ -55,7 +54,7 @@ export class PlanningService {
     });
   }
 
-  selectPlanning(planning) {
+  selectPlanning(planning: Planning) {
     this.selectedPlanning.next(planning);
   }
 
@@ -78,6 +77,13 @@ export class PlanningService {
 
   updateSelectedPlanning() {
     this.apiPlanningService.update(this.getSelectedPlanning().getValue().id,
-      this.getSelectedPlanning().getValue()).toPromise();
+      this.getSelectedPlanning().getValue()).subscribe();
+
+    let selectedPlanningUpdated: Planning = new Planning();
+    const getPlanning = this.apiPlanningService.getOne(this.selectedPlanning.getValue().id).toPromise();
+    getPlanning.then(data => {
+      selectedPlanningUpdated = data;
+      this.selectPlanning(selectedPlanningUpdated);
+    });
   }
 }
