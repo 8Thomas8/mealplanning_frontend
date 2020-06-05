@@ -32,7 +32,7 @@
 <div class="selectedPlanning" *ngIf="selectedPlanning">
   <h2> Planning: {{ selectedPlanning.name }}</h2>
 
-  <app-calendar></app-calendar>
+  <app-calendar [planning]="selectedPlanning"></app-calendar>
 
 <!--  <button mat-raised-button color="warn" (click)="onDeletePlanning(selectedPlanning)" class="deleteButton">Supprimer</button>-->
 </div>

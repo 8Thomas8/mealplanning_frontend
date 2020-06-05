@@ -19,7 +19,7 @@ const MOMENT_NAMES = ['Midi', 'Soir'];
   styleUrls: ['./calendar.component.sass']
 })
 export class CalendarComponent implements OnInit {
-  planning: Planning;
+  @Input() planning: Planning;
 
   momentNames = MOMENT_NAMES;
 
@@ -46,7 +46,6 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.planningService.getSelectedPlanning().subscribe(data => this.planning = data);
     this.todayDate = new Date();
     this.baseDate = this.todayDate;
     this.getDaysInMonth(this.baseDate.getMonth(), this.baseDate.getFullYear());
@@ -101,6 +100,7 @@ export class CalendarComponent implements OnInit {
 
   onClose() {
     this.createMealModalService.setFalse();
+    this.resetSlotForm();
   }
 
   onCreateSlot() {
@@ -111,8 +111,20 @@ export class CalendarComponent implements OnInit {
     newSlot.meals = null;
 
     const planningUpdated = this.planning;
+
+    if (this.planning.slots === undefined) {
+      this.planning.slots = new Array();
+    }
+
     planningUpdated.slots.push(newSlot);
     this.planningService.changeSelectedPlanning(planningUpdated);
     this.planningService.updateSelectedPlanning();
+
+    this.onClose();
+  }
+
+  private resetSlotForm() {
+    this.slotForm.reset();
+    this.slotForm.get('guestNumber').setValue(1);
   }
 }
