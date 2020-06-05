@@ -44,6 +44,7 @@ export class DashboardContentComponent implements OnInit {
 
     const planning = new Planning();
     planning.name = this.newPlanningForm.get('name').value;
+    planning.slots = new Array();
 
     this.planningService.addPlanning(planning);
 
