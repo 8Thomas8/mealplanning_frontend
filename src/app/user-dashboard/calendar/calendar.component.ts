@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {ApiSlotService} from '../../services/api/api-slot.service';
 import {CreateMealModalService} from '../../services/create-meal-modal.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Slot} from '../../models/slot';
+import {PlanningService} from '../../services/planning.service';
+import {Planning} from '../../models/planning';
 
 const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
   'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
@@ -17,6 +19,8 @@ const MOMENT_NAMES = ['Midi', 'Soir'];
   styleUrls: ['./calendar.component.sass']
 })
 export class CalendarComponent implements OnInit {
+  planning: Planning;
+
   momentNames = MOMENT_NAMES;
 
   baseDate: Date;
@@ -35,12 +39,14 @@ export class CalendarComponent implements OnInit {
     name: new FormControl('', [Validators.required])
   });
 
-  constructor(private apiSlotService: ApiSlotService, private createMealModalService: CreateMealModalService) {
+  constructor(private apiSlotService: ApiSlotService, private createMealModalService: CreateMealModalService,
+              private planningService: PlanningService) {
     this.days = new Array();
     this.getCreateModalStatus();
   }
 
   ngOnInit(): void {
+    this.planningService.getSelectedPlanning().subscribe(data => this.planning = data);
     this.todayDate = new Date();
     this.baseDate = this.todayDate;
     this.getDaysInMonth(this.baseDate.getMonth(), this.baseDate.getFullYear());
@@ -104,6 +110,9 @@ export class CalendarComponent implements OnInit {
     newSlot.momentName = this.slotForm.get('momentName').value;
     newSlot.meals = null;
 
-    this.apiSlotService.create(newSlot).subscribe();
+    const planningUpdated = this.planning;
+    planningUpdated.slots.push(newSlot);
+    this.planningService.changeSelectedPlanning(planningUpdated);
+    this.planningService.updateSelectedPlanning();
   }
 }
