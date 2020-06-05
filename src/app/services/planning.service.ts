@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {Planning} from '../models/planning';
 import {ApiPlanningService} from './api/api-planning.service';
@@ -52,7 +52,7 @@ export class PlanningService {
 
       user.plannings = this.currentPlannings.getValue();
       this.apiUserService.updateSelf(this.userId, user).subscribe();
-  });
+    });
   }
 
   selectPlanning(planning) {
@@ -63,6 +63,10 @@ export class PlanningService {
     return this.selectedPlanning;
   }
 
+  changeSelectedPlanning(planning: Planning) {
+    this.selectedPlanning.next(planning);
+  }
+
   delete(selectedPlanning: Planning) {
     const user = this.authenticationService.getCurrentUser().getValue();
     user.plannings = user.plannings.filter(planning => planning.id !== selectedPlanning.id);
@@ -70,5 +74,10 @@ export class PlanningService {
     this.currentPlannings.next(user.plannings);
     const updateUser = this.apiUserService.updateSelf(this.userId, user).toPromise();
     updateUser.then(() => this.apiPlanningService.deleteOne(selectedPlanning.id).subscribe());
+  }
+
+  updateSelectedPlanning() {
+    this.apiPlanningService.update(this.getSelectedPlanning().getValue().id,
+      this.getSelectedPlanning().getValue()).toPromise();
   }
 }
