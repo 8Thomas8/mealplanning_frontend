@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/8thomas8/mealplanning_frontend/badge)](https://www.codefactor.io/repository/github/8thomas8/mealplanning_frontend)
+
 # Mealplanning
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
