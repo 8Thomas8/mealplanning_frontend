@@ -28,7 +28,7 @@ export class SidebarContentComponent implements OnInit {
   }
 
   onCreate() {
-    this.planningService.selectPlanning(null);
+    this.planningService.changeSelectedPlanning(null);
     this.createPlanningModalService.setTrue();
   }
 
@@ -37,6 +37,6 @@ export class SidebarContentComponent implements OnInit {
   }
 
   onSelect(planning: Planning) {
-    this.planningService.selectPlanning(planning);
+    this.planningService.changeSelectedPlanning(planning);
   }
 }
