@@ -54,10 +54,6 @@ export class PlanningService {
     });
   }
 
-  selectPlanning(planning: Planning) {
-    this.selectedPlanning.next(planning);
-  }
-
   getSelectedPlanning() {
     return this.selectedPlanning;
   }
@@ -75,15 +71,29 @@ export class PlanningService {
     updateUser.then(() => this.apiPlanningService.deleteOne(selectedPlanning.id).subscribe());
   }
 
-  updateSelectedPlanning() {
-    this.apiPlanningService.update(this.getSelectedPlanning().getValue().id,
-      this.getSelectedPlanning().getValue()).subscribe();
+  updateSelectedPlanning(planning: Planning) {
+    let index: number;
 
-    let selectedPlanningUpdated: Planning = new Planning();
-    const getPlanning = this.apiPlanningService.getOne(this.selectedPlanning.getValue().id).toPromise();
-    getPlanning.then(data => {
-      selectedPlanningUpdated = data;
-      this.selectPlanning(selectedPlanningUpdated);
+    let planningUpdated: Planning;
+
+    for (const elt of this.currentPlannings.getValue()) {
+      if (elt.name === planning.name) {
+        index = this.currentPlannings.getValue().indexOf(elt);
+      }
+    }
+
+    let currentPlanning = this.currentPlannings.getValue();
+    currentPlanning.splice(index, 1);
+
+    const waitResponse = this.apiPlanningService.update(planning.id,
+      planning).toPromise();
+
+    waitResponse.then(response => {
+      planningUpdated = response;
+      currentPlanning = currentPlanning.splice(index, 0, planningUpdated);
+      this.selectedPlanning.next(response);
     });
+
+    this.currentPlannings.next(currentPlanning);
   }
 }
