@@ -122,8 +122,6 @@ export class CalendarComponent implements OnInit {
     planningUpdated.slots.push(newSlot);
     this.planningService.updateSelectedPlanning(planningUpdated);
 
-    this.getSelectedPlanning();
-
     this.onClose();
   }
 
