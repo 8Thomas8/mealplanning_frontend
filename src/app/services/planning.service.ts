@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {Planning} from '../models/planning';
 import {ApiPlanningService} from './api/api-planning.service';
@@ -28,7 +28,6 @@ export class PlanningService {
 
   getPlannings() {
     this.apiUserService.getOne(this.userId).subscribe(data => {
-      console.log(data);
       const plannings = data.content[0].plannings;
       this.currentPlannings.next(plannings);
     });
@@ -52,15 +51,15 @@ export class PlanningService {
 
       user.plannings = this.currentPlannings.getValue();
       this.apiUserService.updateSelf(this.userId, user).subscribe();
-  });
-  }
-
-  selectPlanning(planning) {
-    this.selectedPlanning.next(planning);
+    });
   }
 
   getSelectedPlanning() {
     return this.selectedPlanning;
+  }
+
+  changeSelectedPlanning(planning: Planning) {
+    this.selectedPlanning.next(planning);
   }
 
   delete(selectedPlanning: Planning) {
@@ -70,5 +69,31 @@ export class PlanningService {
     this.currentPlannings.next(user.plannings);
     const updateUser = this.apiUserService.updateSelf(this.userId, user).toPromise();
     updateUser.then(() => this.apiPlanningService.deleteOne(selectedPlanning.id).subscribe());
+  }
+
+  updateSelectedPlanning(planning: Planning) {
+    let index: number;
+
+    let planningUpdated: Planning;
+
+    for (const elt of this.currentPlannings.getValue()) {
+      if (elt.name === planning.name) {
+        index = this.currentPlannings.getValue().indexOf(elt);
+      }
+    }
+
+    let currentPlanning = this.currentPlannings.getValue();
+    currentPlanning.splice(index, 1);
+
+    const waitResponse = this.apiPlanningService.update(planning.id,
+      planning).toPromise();
+
+    waitResponse.then(response => {
+      planningUpdated = response;
+      currentPlanning = currentPlanning.splice(index, 0, planningUpdated);
+      this.selectedPlanning.next(response);
+    });
+
+    this.currentPlannings.next(currentPlanning);
   }
 }

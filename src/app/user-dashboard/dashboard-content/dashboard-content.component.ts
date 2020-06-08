@@ -3,8 +3,6 @@ import {CreatePlanningModalService} from '../../services/create-planning-modal.s
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Planning} from '../../models/planning';
 import {PlanningService} from '../../services/planning.service';
-import {ApiDayService} from '../../services/api/api-day.service';
-import {Day} from '../../models/day';
 
 const ERROR_EMPTY = 'Vous devez entrer une valeur';
 
@@ -21,7 +19,7 @@ export class DashboardContentComponent implements OnInit {
     name: new FormControl('', [Validators.required])
   });
 
-  constructor(private createPlanningModalService: CreatePlanningModalService, private planningService: PlanningService, private apiDayService: ApiDayService) {
+  constructor(private createPlanningModalService: CreatePlanningModalService, private planningService: PlanningService) {
   }
 
   ngOnInit(): void {
@@ -46,6 +44,7 @@ export class DashboardContentComponent implements OnInit {
 
     const planning = new Planning();
     planning.name = this.newPlanningForm.get('name').value;
+    planning.slots = new Array();
 
     this.planningService.addPlanning(planning);
 
@@ -61,12 +60,8 @@ export class DashboardContentComponent implements OnInit {
     this.planningService.getSelectedPlanning().subscribe(planning => this.selectedPlanning = planning);
   }
 
-  onDeletePlanning(selectedPlanning: Planning) {
-    this.planningService.delete(selectedPlanning);
-    this.selectedPlanning = null;
-  }
-
-  onDeleteDay(day: Day) {
-    this.apiDayService.deleteOne(day.id).subscribe();
-  }
+  // onDeletePlanning(selectedPlanning: Planning) {
+  //   this.planningService.delete(selectedPlanning);
+  //   this.selectedPlanning = null;
+  // }
 }

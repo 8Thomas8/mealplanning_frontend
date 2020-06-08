@@ -1,7 +1,7 @@
-import {Day} from './day';
+import {Slot} from './slot';
 
 export class Planning {
   id?: number;
   name: string;
-  days?: Day[];
+  slots: Slot[];
 }

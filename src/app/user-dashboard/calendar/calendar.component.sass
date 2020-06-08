@@ -1,0 +1,36 @@
+.day-of-week, .date-grid
+  display: grid
+  grid-template-columns: repeat(7, 1fr)
+  grid-gap: 0px
+
+.month-indicator, .gridCalendar
+  text-align: center
+
+.date-grid > div
+  display: flex
+  flex-direction: column
+
+.modalCreateSlot
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+.createMoment
+  color: blue
+  text-decoration: underline
+
+.createMoment:hover
+  cursor: pointer
+
+app-overlay
+  position: absolute
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+
+.closeCreateModalIcon
+  color: red
+  float: right
+  cursor: pointer

@@ -1,6 +1,8 @@
-<div class="placeholderDiv">
+<div class="placeholderDiv" *ngIf="!(selectedPlanning || showCreateModalStatus)">
   <p class="placeholder">Dashboard</p>
 </div>
+
+<app-overlay *ngIf="showCreateModalStatus"></app-overlay>
 
 <div class="createModal" *ngIf="showCreateModalStatus">
   <form [formGroup]="newPlanningForm" (ngSubmit)="onCreate()">
@@ -29,9 +31,8 @@
 
 <div class="selectedPlanning" *ngIf="selectedPlanning">
   <h2> Planning: {{ selectedPlanning.name }}</h2>
-  <div *ngFor="let day of selectedPlanning.days">
-    {{day.date}}
-    <button (click)="onDeleteDay(day)">Delete</button>
-  </div>
-  <button mat-raised-button color="warn" (click)="onDeletePlanning(selectedPlanning)">Supprimer</button>
+
+  <app-calendar></app-calendar>
+
+<!--  <button mat-raised-button color="warn" (click)="onDeletePlanning(selectedPlanning)" class="deleteButton">Supprimer</button>-->
 </div>

@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
-import {Day} from '../../models/day';
+import {Slot} from '../../models/slot';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiDayService extends ApiService<Day>{
+export class ApiSlotService extends ApiService<Slot> {
 
   getAll(params) {
     return this.get();
@@ -28,6 +28,7 @@ export class ApiDayService extends ApiService<Day>{
   }
 
   protected url(): string {
-    return 'day';
+    return 'slot';
   }
 }
+
