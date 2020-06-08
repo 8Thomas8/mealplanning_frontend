@@ -20,7 +20,6 @@ const MOMENT_NAMES = ['Midi', 'Soir'];
   styleUrls: ['./calendar.component.sass']
 })
 export class CalendarComponent implements OnInit {
-  // @Input() planning: Planning;
   planning: Planning;
 
   momentNames = MOMENT_NAMES;
@@ -96,6 +95,7 @@ export class CalendarComponent implements OnInit {
   }
 
   onClickCreateMeal(moment: string, day: Date) {
+    console.log(moment);
     this.createMealModalService.setTrue();
     this.slotForm.get('momentName').setValue(moment);
     this.slotForm.get('date').setValue(day);
