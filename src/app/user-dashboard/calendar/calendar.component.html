@@ -20,13 +20,13 @@
     <div class="date-grid">
       <div *ngFor="let day of days" class="dayDiv" [style]="getGridPos(day)">
         {{ day.getDate() }}
-        <p>Midi: <span *ngIf="getSlot(day, 'Midi');else noSlot" style="color: red;"> {{getSlot(day, 'Midi').id}}</span>
-          <ng-template #noSlot><span class="createMoment" (click)="onClickCreateMeal('Midi', day)">Créer</span>
+        <p>Midi: <span *ngIf="getSlot(day, 'Midi');else noSlotM" style="color: red;"> {{getSlot(day, 'Midi').id}}</span>
+          <ng-template #noSlotM><span class="createMoment" (click)="onClickCreateMeal('Midi', day)">Créer</span>
           </ng-template>
         </p>
 
-        <p>Soir: <span *ngIf="getSlot(day, 'Soir');else noSlot" style="color: red;"> {{getSlot(day, 'Soir').id}}</span>
-          <ng-template #noSlot><span class="createMoment" (click)="onClickCreateMeal('Soir', day)">Créer</span>
+        <p>Soir: <span *ngIf="getSlot(day, 'Soir');else noSlotS" style="color: red;"> {{getSlot(day, 'Soir').id}}</span>
+          <ng-template #noSlotS><span class="createMoment" (click)="onClickCreateMeal('Soir', day)">Créer</span>
           </ng-template>
         </p>
 
