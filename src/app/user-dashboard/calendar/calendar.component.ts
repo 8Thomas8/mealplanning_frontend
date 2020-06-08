@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Slot} from '../../models/slot';
 import {PlanningService} from '../../services/planning.service';
 import {Planning} from '../../models/planning';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 const MONTH_NAMES = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
   'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
@@ -19,7 +20,8 @@ const MOMENT_NAMES = ['Midi', 'Soir'];
   styleUrls: ['./calendar.component.sass']
 })
 export class CalendarComponent implements OnInit {
-  @Input() planning: Planning;
+  // @Input() planning: Planning;
+  planning: Planning;
 
   momentNames = MOMENT_NAMES;
 
@@ -49,6 +51,7 @@ export class CalendarComponent implements OnInit {
     this.todayDate = new Date();
     this.baseDate = this.todayDate;
     this.getDaysInMonth(this.baseDate.getMonth(), this.baseDate.getFullYear());
+    this.getSelectedPlanning();
   }
 
   getDaysInMonth(month: number, year: number) {
@@ -117,8 +120,9 @@ export class CalendarComponent implements OnInit {
     }
 
     planningUpdated.slots.push(newSlot);
-    this.planningService.changeSelectedPlanning(planningUpdated);
-    this.planningService.updateSelectedPlanning();
+    this.planningService.updateSelectedPlanning(planningUpdated);
+
+    this.getSelectedPlanning();
 
     this.onClose();
   }
@@ -132,15 +136,17 @@ export class CalendarComponent implements OnInit {
         && (slot.date.getMonth() === date.getMonth())
         && (slot.date.getDate() === date.getDate());
     });
-    console.log(slotArray);
     for (const slot of slotArray) {
       if (slot.momentName === momentName) {
-        console.log(slot);
         return slot;
       }
     }
 
     return null;
+  }
+
+  getSelectedPlanning() {
+    this.planningService.getSelectedPlanning().subscribe(data => this.planning = data);
   }
 
   private resetSlotForm() {
